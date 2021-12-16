@@ -1,0 +1,42 @@
+<h1 style = "text-align: center;" >calculate signal to noise ratio and contrast to noise ratio selected ROI </h1>
+<div fxLayout="column" fxLayoutAlign="start center" class="mat-body-1">
+    <input type="file" (change)="fileChangeEvent($event)" />
+    <br />
+    <br />
+    <br />
+    <br />
+    <button (click)="toggleContainWithinAspectRatio()">{{containWithinAspectRatio?'Fill Aspect Ratio':'Contain Within Aspect Ratio'}}</button>
+  
+    <br />
+    <br />
+  <button (click)="zoomOut()">Zoom -</button> <button (click)="zoomIn()">Zoom +</button>
+    
+    
+    <div>
+        <image-cropper
+            [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="true"
+            [containWithinAspectRatio]="containWithinAspectRatio"
+            [aspectRatio]= 4
+            [resizeToWidth]="500"
+            [cropperMinWidth]="128"
+            [onlyScaleDown]="true"
+            [roundCropper]="false"
+            [canvasRotation]="canvasRotation"
+            [transform]="transform"
+            [alignImage]="'left'"
+            [style.display]="showCropper ? null : 'none'"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+            (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady($event)"
+            (loadImageFailed)="loadImageFailed()"
+        ></image-cropper>
+    </div>
+    <img [src]="croppedImage" [style.border]="croppedImage ? '1px solid black' : 'none'" />
+    <button (click)="submit()">submit</button>
+    <div *ngIf="isShown" >
+      <h5>Signal to Noise Ratio : {{result.SNR}}</h5>
+      <h5>Contrast to noise ratio : {{result.CNR}}</h5>
+     
+    </div></div>

@@ -1,0 +1,17 @@
+<h1 style = "text-align: center;" >plot intensity graph along selected X and Y axes for uploaded image</h1>
+<img [src]="url" > 
+<input class="mat-button"  type='file' (change)="onSelectFile($event)">
+<div *ngIf="isShown" >
+    <ngx-slider [(value)]="rowValue" [options]="rowOptions"></ngx-slider>
+Row Value: {{rowValue}}
+<ngx-slider [(value)]="columnValue" [options]="columnOptions"></ngx-slider>
+Column Value: {{columnValue}}
+
+<button mat-button class="btn btn-primary"  (click)="onSubmit()">Submit</button>
+</div>
+
+<div *ngIf="showplots" >
+    <img  class="images" src={{intensityplot}}/>
+   
+  </div>
+
